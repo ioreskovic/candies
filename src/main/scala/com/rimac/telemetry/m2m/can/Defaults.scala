@@ -29,4 +29,6 @@ trait Defaults {
   def strChars[_: P]: P[Unit] = P(CharsWhile(stringChars))
 
   def string[_: P]: P[String] = P(space ~ "\"" ~/ (strChars | escape).rep.! ~ "\"")
+
+  def newLine[_: P]: P[Unit] = P(CharPred(c => c == '\r' | c =='\n'))
 }

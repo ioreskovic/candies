@@ -84,9 +84,8 @@ object Signal {
   private def consumers[_: P]: P[Seq[Consumer]] =
     P(CharsWhile(nameChars, 1).!.map(Consumer).rep(sep = ","./))
 
-  def parser[_: P]: P[Signal] =
+  def signal[_: P]: P[Signal] =
     P(
-      Start ~
         signalStart ~
         name ~
         position ~
@@ -94,8 +93,7 @@ object Signal {
         coding ~
         range ~
         unit ~/
-        consumers ~
-        End
+        consumers
     ).map {
       case (
           sName,
@@ -121,11 +119,22 @@ object Signal {
         )
     }
 
+  def signals[_: P]: P[Seq[Signal]] = P(newLine.rep ~ (signal ~ newLine.rep).rep)
+
   def main(args: Array[String]): Unit = {
     val r = parse(
-      " SG_ PCU_FC_handled_ERR_ID : 39|8@0+ (-1.4,-2) [-15,0] \"km/h\" IVI,M2M,IVI_M2M",
-      parser(_)
+      s"""
+         |
+         |           SG_ SIG_1 : 0|8@0+ (-1.4,-2) [-15,0] "km/h" CON_1,CON_2
+         |
+         |SG_ SIG_2 : 8|16@0+ (-1.4,-2) [-15,0] "km/h"
+         |
+         |   SG_ SIG_3 : 24|30@0+ (-1.4,-2) [-15,0] "km/h" CON_3
+         |
+         |""".stripMargin,
+      signals(_)
     )
+
     println(r)
   }
 }
