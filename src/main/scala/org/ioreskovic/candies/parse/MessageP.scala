@@ -1,8 +1,8 @@
-package com.rimac.telemetry.m2m.can.parse
+package org.ioreskovic.candies.parse
 
-import com.rimac.telemetry.m2m.can._
-import com.rimac.telemetry.m2m.can.parse.common._
-import com.rimac.telemetry.m2m.can.parse.signal._
+import org.ioreskovic.candies._
+import org.ioreskovic.candies.parse.common._
+import org.ioreskovic.candies.parse.signal._
 import fastparse.SingleLineWhitespace._
 import fastparse._
 

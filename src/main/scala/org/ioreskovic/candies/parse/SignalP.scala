@@ -1,7 +1,7 @@
-package com.rimac.telemetry.m2m.can.parse
+package org.ioreskovic.candies.parse
 
-import com.rimac.telemetry.m2m.can._
-import com.rimac.telemetry.m2m.can.parse.common._
+import org.ioreskovic.candies._
+import org.ioreskovic.candies.parse.common._
 import fastparse.SingleLineWhitespace._
 import fastparse._
 
@@ -49,7 +49,8 @@ private[parse] trait SignalP {
           (sFactor, sAddend),
           (sMin, sMax),
           sUnit,
-          sCons) =>
+          sCons
+          ) =>
         Signal(sName, sOffset, sLength, sFactor, sAddend, sMin, sMax, sUnit, sSign, sEndian, sCons)
     }
 

@@ -1,6 +1,6 @@
-package com.rimac.telemetry.m2m.can
+package org.ioreskovic.candies
 
-import com.rimac.telemetry.m2m.can.Signal._
+import Signal._
 
 object Signal {
 

@@ -1,4 +1,4 @@
-package com.rimac.telemetry.m2m.can.parse
+package org.ioreskovic.candies.parse
 
 import fastparse.SingleLineWhitespace._
 import fastparse._

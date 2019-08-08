@@ -1,6 +1,6 @@
-package com.rimac.telemetry.m2m.can
+package org.ioreskovic.candies
 
-import com.rimac.telemetry.m2m.can.Message.Definition
+import Message.Definition
 
 object Message {
 

@@ -1,4 +1,4 @@
-package com.rimac.telemetry.m2m.can
+package org.ioreskovic.candies
 
 package object parse {
 
