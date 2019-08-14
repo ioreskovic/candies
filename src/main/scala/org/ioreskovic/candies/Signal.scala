@@ -22,10 +22,16 @@ object Signal {
 
   final case class Consumer(value: String) extends AnyVal
 
+  sealed trait Type
+  final case object Regular extends Type
+  final case object Multiplexer extends Type
+  final case class Multiplexed(group: Int) extends Type
+
 }
 
 final case class Signal(
     name: Name,
+    mtype: Type,
     offset: Offset,
     length: Length,
     factor: Factor,

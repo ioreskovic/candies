@@ -11,7 +11,7 @@ private[parse] trait MessageP {
 
   private def id[_: P]: P[Message.Id] = integral.!.map(_.toLong).map(Message.Id)
 
-  private def name[_: P]: P[Message.Name] = nameString.map(Message.Name)
+  private def name[_: P]: P[Message.Name] = P(nameString.map(Message.Name) ~ ":")
 
   private def length[_: P]: P[Message.Length] = integral.!.map(_.toInt).map(Message.Length)
 

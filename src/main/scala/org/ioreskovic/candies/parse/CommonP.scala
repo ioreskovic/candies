@@ -34,7 +34,7 @@ private[parse] trait CommonP {
 
   private[parse] def newLine[_: P]: P[Unit] = P(CharPred(c => c == '\r' | c == '\n'))
 
-  private[parse] def nameString[_: P]: P[String] = P(CharsWhile(nameChars, 1).! ~ ":")
+  private[parse] def nameString[_: P]: P[String] = P(CharsWhile(nameChars, 1).!)
 
   private[parse] def nodeRefs[_: P]: P[List[String]] =
     P(CharsWhile(nameChars, 1).!.rep(sep = ","./)).map(_.toList)

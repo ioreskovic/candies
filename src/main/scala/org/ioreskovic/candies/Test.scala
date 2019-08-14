@@ -8,10 +8,12 @@ object Test {
   def main(args: Array[String]): Unit = {
     val messageText =
       s"""
-         |  BO_ 133 MSG_1: 7 PRO_0
-         |    SG_ SIG_1 : 0|8@0+ (-1.4,-2) [-15,0] "km/h" CON_1,CON_2
-         |    SG_ SIG_2 : 8|16@0+ (-1.4,-2) [-15,0] "km/h"
-         |    SG_ SIG_3 : 24|30@0+ (-1.4,-2) [-15,0] "km/h" CON_3
+         |BO_ 1845 TemperatureMsg: 8 Vector__XXX
+         | SG_ MultiplexIndexSignal M : 39|4@0+ (1,0) [0|0] "" Vector__XXX
+         | SG_ NormalSignalAlwaysPresent : 16|4@1- (1,0) [0|0] "" Vector__XXX
+         | SG_ TemperatureIndoorsMultiplexed m0 : 7|16@0- (0.1,-40) [0|0] "degC" Vector__XXX
+         | SG_ TemperatureOutdoorsMultiplexed m3 : 7|16@0- (0.1,-40) [0|0] "degC" Vector__XXX
+         | SG_ TemperatureUndergroundMultiplexed m11 : 7|16@0- (0.1,-40) [0|0] "degC" Vector__XXX
          |
          |""".stripMargin
 
