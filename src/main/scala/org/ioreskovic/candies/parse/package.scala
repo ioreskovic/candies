@@ -8,4 +8,6 @@ package object parse {
 
   object message extends MessageP
 
+  object cycle extends CycleP
+
 }

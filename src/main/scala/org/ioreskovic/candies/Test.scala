@@ -1,6 +1,8 @@
 package org.ioreskovic.candies
 
 import org.ioreskovic.candies.parse.message._
+import org.ioreskovic.candies.parse.cycle._
+
 import fastparse._
 
 object Test {
@@ -27,5 +29,17 @@ object Test {
     println("_" * 60)
     println("Result")
     println(messageResult)
+
+    val intervalText =
+      s"""
+         | BA_ "GenMsgCycleTime" BO_ 1845 25;
+         |
+         |""".stripMargin
+
+    val intervalResult = parse(
+      intervalText,
+      cycle(_)
+    )
+    println(intervalResult)
   }
 }
