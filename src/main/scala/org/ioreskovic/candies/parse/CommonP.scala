@@ -1,6 +1,6 @@
 package org.ioreskovic.candies.parse
 
-import fastparse.SingleLineWhitespace._
+import fastparse.NoWhitespace._
 import fastparse._
 
 private[parse] trait CommonP {
@@ -20,6 +20,8 @@ private[parse] trait CommonP {
   private[parse] def stringChars(c: Char): Boolean = c != '\"' && c != '\\'
 
   private[parse] def space[_: P]: P[Unit] = P(CharsWhileIn(" \r\n", 0))
+
+  private[parse] def spaceSL[_: P]: P[Unit] = P(CharsWhileIn(" \t"))
 
   private[parse] def hexDigit[_: P]: P[Unit] = P(CharIn("0-9a-fA-F"))
 

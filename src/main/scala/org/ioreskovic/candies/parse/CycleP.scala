@@ -16,6 +16,7 @@ private[parse] trait CycleP {
   private def interval[_: P]: P[Duration] =
     integral.!.map(_.toLong).map(i => Duration(i, TimeUnit.MILLISECONDS))
   private def end[_: P]: P[Unit] = P(";")
+  private def s[_: P]: P[Unit] = spaceSL.rep(0)
 
   def cycle[_: P]: P[Cycle] = P(newLine.rep ~ start ~ ident ~ msgRef ~ interval ~ end).map {
     case (msgId, duration) =>

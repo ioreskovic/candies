@@ -1,45 +1,38 @@
 package org.ioreskovic.candies
 
-import org.ioreskovic.candies.parse.message._
-import org.ioreskovic.candies.parse.cycle._
-
+import org.ioreskovic.candies.parse.network._
 import fastparse._
 
 object Test {
 
   def main(args: Array[String]): Unit = {
-    val messageText =
+    val input =
       s"""
-         |BO_ 1845 TemperatureMsg: 8 Vector__XXX
-         | SG_ MultiplexIndexSignal M : 39|4@0+ (1,0) [0|0] "" Vector__XXX
-         | SG_ NormalSignalAlwaysPresent : 16|4@1- (1,0) [0|0] "" Vector__XXX
-         | SG_ TemperatureIndoorsMultiplexed m0 : 7|16@0- (0.1,-40) [0|0] "degC" Vector__XXX
-         | SG_ TemperatureOutdoorsMultiplexed m3 : 7|16@0- (0.1,-40) [0|0] "degC" Vector__XXX
-         | SG_ TemperatureUndergroundMultiplexed m11 : 7|16@0- (0.1,-40) [0|0] "degC" Vector__XXX
+         |BA_ "GenMsgCycleTime" BO_ 1 33;
+         |
+         |BO_ 0 MSG1: 8 Vector__XXX
+         | SG_ Mux1 M : 39|4@0+ (1,0) [0|0] "" Vector__XXX
+         | SG_ Reg1 : 16|4@1- (1,0) [0|0] "" Vector__XXX
+         | SG_ Mex0 m0 : 7|16@0- (0.1,-40) [0|0] "degC" Vector__XXX
+         | SG_ Mex3 m3 : 7|16@0- (0.1,-40) [0|0] "degC" Vector__XXX
+         | SG_ Mex11 m11 : 7|16@0- (0.1,-40) [0|0] "degC" Vector__XXX
+         |
+         |BA_ "GenMsgCycleTime" BO_ 0 25;
+         |
+         |BO_ 1 MSG2: 8 Vector__XXX
+         | SG_ Mux1 M : 39|4@0+ (1,0) [0|0] "" Vector__XXX
+         | SG_ Reg1 : 16|4@1- (1,0) [0|0] "" Vector__XXX
+         | SG_ Mex0 m0 : 7|16@0- (0.1,-40) [0|0] "degC" Vector__XXX
+         | SG_ Mex3 m3 : 7|16@0- (0.1,-40) [0|0] "degC" Vector__XXX
+         | SG_ Mex11 m11 : 7|16@0- (0.1,-40) [0|0] "degC" Vector__XXX
          |
          |""".stripMargin
 
-    val messageResult = parse(
-      messageText,
-      message(_)
+    val result = parse(
+      input,
+      network(_)
     )
-    println("Input")
-    println("_" * 60)
-    println(messageText)
-    println("_" * 60)
-    println("Result")
-    println(messageResult)
 
-    val intervalText =
-      s"""
-         | BA_ "GenMsgCycleTime" BO_ 1845 25;
-         |
-         |""".stripMargin
-
-    val intervalResult = parse(
-      intervalText,
-      cycle(_)
-    )
-    println(intervalResult)
+    println(result)
   }
 }

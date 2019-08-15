@@ -10,4 +10,6 @@ package object parse {
 
   object cycle extends CycleP
 
+  object network extends NetworkP
+
 }
