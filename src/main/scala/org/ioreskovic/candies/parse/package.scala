@@ -12,4 +12,6 @@ package object parse {
 
   object network extends NetworkP
 
+  object dbc extends DbcP
+
 }

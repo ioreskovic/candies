@@ -4,7 +4,8 @@ import org.ioreskovic.candies._
 import org.ioreskovic.candies.parse.common._
 import fastparse.SingleLineWhitespace._
 import fastparse._
-import org.ioreskovic.candies.Signal.{Multiplexed, Multiplexer, Regular, Type}
+import org.ioreskovic.candies
+import org.ioreskovic.candies.internal.Signal
 
 private[parse] trait SignalP {
   private def start[_: P]: P[Unit] = P("SG_")
@@ -39,7 +40,7 @@ private[parse] trait SignalP {
 
   private def consumers[_: P]: P[List[Signal.Consumer]] = nodeRefs.map(_.map(Signal.Consumer))
 
-  private def mtype[_: P]: P[Type] =
+  private def mtype[_: P]: P[SignalType] =
     P("M".!.map(_ => Multiplexer) | ("m" ~ integral.!.map(g => Multiplexed(g.toInt)))).?.map(
       _.getOrElse(Regular)
     )
@@ -58,7 +59,7 @@ private[parse] trait SignalP {
           sUnit,
           sCons
           ) =>
-        Signal(
+        candies.internal.Signal(
           sName,
           mType,
           sOffset,

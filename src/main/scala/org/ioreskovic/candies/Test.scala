@@ -1,7 +1,8 @@
 package org.ioreskovic.candies
 
-import org.ioreskovic.candies.parse.network._
 import fastparse._
+import org.ioreskovic.candies.parse.dbc._
+import org.ioreskovic.candies.translation.syntax.network._
 
 object Test {
 
@@ -30,9 +31,9 @@ object Test {
 
     val result = parse(
       input,
-      network(_)
+      dbc(_)
     )
 
-    println(result)
+    println(result.get.value.toApi)
   }
 }

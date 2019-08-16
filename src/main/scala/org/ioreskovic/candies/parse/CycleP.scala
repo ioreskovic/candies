@@ -4,7 +4,8 @@ import java.util.concurrent.TimeUnit
 
 import fastparse._
 import fastparse.SingleLineWhitespace._
-import org.ioreskovic.candies.{Cycle, Message}
+import org.ioreskovic.candies
+import org.ioreskovic.candies.internal.{Cycle, Message}
 import org.ioreskovic.candies.parse.common._
 
 import scala.concurrent.duration.Duration
@@ -20,6 +21,6 @@ private[parse] trait CycleP {
 
   def cycle[_: P]: P[Cycle] = P(newLine.rep ~ start ~ ident ~ msgRef ~ interval ~ end).map {
     case (msgId, duration) =>
-      Cycle(msgId, duration)
+      candies.internal.Cycle(msgId, duration)
   }
 }

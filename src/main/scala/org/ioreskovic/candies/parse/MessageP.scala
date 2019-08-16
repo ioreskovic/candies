@@ -1,10 +1,11 @@
 package org.ioreskovic.candies.parse
 
-import org.ioreskovic.candies._
 import org.ioreskovic.candies.parse.common._
 import org.ioreskovic.candies.parse.signal._
 import fastparse.SingleLineWhitespace._
 import fastparse._
+import org.ioreskovic.candies
+import org.ioreskovic.candies.internal.Message
 
 private[parse] trait MessageP {
   private def start[_: P]: P[Unit] = P("BO_")
@@ -15,15 +16,15 @@ private[parse] trait MessageP {
 
   private def length[_: P]: P[Message.Length] = integral.!.map(_.toInt).map(Message.Length)
 
-  private def producers[_: P]: P[List[Message.Producer]] = nodeRefs.map(_.map(Message.Producer))
+  private def producer[_: P]: P[Message.Producer] = nameString.map(Message.Producer)
 
   private def definition[_: P]: P[Message.Definition] =
-    P(start ~ newLine.rep ~ id ~ name ~ length ~ producers).map {
-      case (mId, mName, mLength, mProducers) => Message.Definition(mId, mName, mLength, mProducers)
+    P(start ~ newLine.rep ~ id ~ name ~ length ~ producer).map {
+      case (mId, mName, mLength, producer) => Message.Definition(mId, mName, mLength, producer)
     }
 
   def message[_: P]: P[Message] = P(newLine.rep ~ definition ~ signals).map {
-    case (mDef, mSigs) => Message(mDef, mSigs)
+    case (mDef, mSigs) => candies.internal.Message(mDef, mSigs)
   }
 
 }

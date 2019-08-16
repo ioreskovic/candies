@@ -1,19 +1,24 @@
 package org.ioreskovic.candies
 
-import Message.Definition
+import org.ioreskovic.candies.Message._
 
 object Message {
 
-  final case class Id(value: Long) extends AnyVal
+  type Id = Long
 
-  final case class Name(value: String) extends AnyVal
+  type Name = String
 
-  final case class Length(value: Int) extends AnyVal
+  type Length = Int
 
-  final case class Producer(value: String) extends AnyVal
-
-  final case class Definition(id: Id, name: Name, length: Length, producers: List[Producer])
+  type Producer = String
 
 }
 
-final case class Message(definition: Definition, signals: List[Signal])
+final case class Message(
+    id: Id,
+    name: Name,
+    length: Length,
+    producer: Producer,
+    signals: List[Signal],
+    multiplex: Option[Multiplex]
+)

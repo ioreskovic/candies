@@ -1,45 +1,45 @@
 package org.ioreskovic.candies
 
-import Signal._
+import org.ioreskovic.candies.Signal._
+
+import scala.concurrent.duration.Duration
 
 object Signal {
 
-  final case class Name(value: String) extends AnyVal
+  type Name = String
 
-  final case class Offset(value: Int) extends AnyVal
+  type Offset = Int
 
-  final case class Length(value: Int) extends AnyVal
+  type Length = Int
 
-  final case class Factor(value: Double) extends AnyVal
+  type Factor = Double
 
-  final case class Addend(value: Double) extends AnyVal
+  type Addend = Double
 
-  final case class Min(value: Double) extends AnyVal
+  type Min = Double
 
-  final case class Max(value: Double) extends AnyVal
+  type Max = Double
 
-  final case class TheUnit(value: String) extends AnyVal
+  type TheUnit = String
 
-  final case class Consumer(value: String) extends AnyVal
+  type Consumer = String
 
-  sealed trait Type
-  final case object Regular extends Type
-  final case object Multiplexer extends Type
-  final case class Multiplexed(group: Int) extends Type
+  type Interval = Duration
 
 }
 
-final case class Signal(
+case class Signal(
     name: Name,
-    mtype: Type,
+    signalType: SignalType,
     offset: Offset,
     length: Length,
+    signing: Signing,
+    endianness: Endianness,
     factor: Factor,
     addend: Addend,
     min: Min,
     max: Max,
     unit: TheUnit,
-    signing: Signing,
-    endianness: Endianness,
+    interval: Interval,
     consumers: List[Consumer]
 )

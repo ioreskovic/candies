@@ -1,4 +1,4 @@
-package org.ioreskovic.candies
+package org.ioreskovic.candies.internal
 
 import scala.concurrent.duration.Duration
 
